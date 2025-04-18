@@ -13,6 +13,12 @@ __pycache__/
 *.err
 *.gif
 *.pdf
+# GPU cache
+__ptxcache__
+__harmonize_cache__
+.DS_Store # for mac users
+**/.DS_Store
+*.prof
 
 # Distribution / packaging
 .Python

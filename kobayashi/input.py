@@ -61,8 +61,8 @@ mcdc.source(
 time_grid = np.linspace(0.0, 200.0, 21)
 mcdc.tally.mesh_tally(
     scores=["flux"],
-    x=np.linspace(0.0, 60.0, 121),
-    y=np.linspace(0.0, 100.0, 201),
+    x=np.linspace(0.0, 60.0, 61),
+    y=np.linspace(0.0, 100.0, 101),
     t=time_grid,
 )
 mcdc.tally.mesh_tally(
@@ -71,10 +71,11 @@ mcdc.tally.mesh_tally(
 )
 
 # Setting
-mcdc.setting(N_particle=int(1e5), N_batch=10, progress_bar=False)
+
+mcdc.setting(N_particle=int(1e8), N_batch=10, progress_bar=False)
 #mcdc.implicit_capture()
 
-mcdc.delta_tracking()
+#mcdc.delta_tracking() #collision_estimator=True
 
 # Run
 mcdc.run()

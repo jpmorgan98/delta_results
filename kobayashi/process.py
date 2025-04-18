@@ -10,7 +10,7 @@ import matplotlib.animation as animation
 # =============================================================================
 
 # Results
-with h5py.File("output_4.h5", "r") as f:
+with h5py.File("output_delta1.h5", "r") as f:
     tallies = f["tallies/mesh_tally_0"]
     flux = tallies["flux"]
     grid = tallies["grid"]
@@ -29,25 +29,47 @@ with h5py.File("output_4.h5", "r") as f:
     phi_sd = flux["sdev"][:]
 
 
+with h5py.File("output.h5", "r") as f:
+    tallies = f["tallies/mesh_tally_0"]
+    flux = tallies["flux"]
+    grid = tallies["grid"]
+    phi_ana = flux["mean"][:]
+    phi_sd_ana = flux["sdev"][:]
+
+
+t = 2.0*60
+t_ana = 2.25*60
+sdev = np.sum(phi_sd)
+sdev_ana = np.sum(phi_sd_ana)
+error = np.linalg.norm(phi_ana-phi)
+print("Error: {}, σ_ana: {}, σ_delta: {}".format(error, sdev, sdev_ana))
+print("FOM_ana: {}, FOM_delta: {}".format(1/(t_ana*sdev_ana), 1/(t*sdev)))
+
+
 # ============ ANIMATION ===================
 
-print(phi[0])
+fig, axs = plt.subplots(ncols=2, nrows=2)
+cax1 = axs[0,0].pcolormesh(X, Y, phi[0])
+text1 = axs[0,0].text(0.02, 1.02, "", transform=axs[0,0].transAxes)
+axs[0,0].set_aspect("equal", "box")
+axs[0,0].set_xlabel("$y$ [cm]")
+axs[0,0].set_ylabel("$x$ [cm]")
 
-plt.figure()
-plt.contourf(X, Y, phi[0]) 
-plt.show()
+cax2 = axs[0,1].pcolormesh(X, Y, phi_sd[0], vmin=0, vmax=1)
+axs[0,1].set_aspect("equal", "box")
+axs[0,1].set_xlabel("$y$ [cm]")
+axs[0,1].set_ylabel("$x$ [cm]")
 
-fig, [ax1,ax2] = plt.subplots(ncols=2)
-cax1 = ax1.pcolormesh(X, Y, phi[0], vmin=phi[0].min(), vmax=phi[0].max())
-text1 = ax1.text(0.02, 1.02, "", transform=ax1.transAxes)
-ax1.set_aspect("equal", "box")
-ax1.set_xlabel("$y$ [cm]")
-ax1.set_ylabel("$x$ [cm]")
+cax3 = axs[1,0].pcolormesh(X, Y, phi_ana[0])
+text3 = axs[1,0].text(0.02, 1.02, "", transform=axs[0,0].transAxes)
+axs[1,0].set_aspect("equal", "box")
+axs[1,0].set_xlabel("$y$ [cm]")
+axs[1,0].set_ylabel("$x$ [cm]")
 
-cax2 = ax2.pcolormesh(X, Y, phi_sd[0], vmin=0, vmax=1)
-ax2.set_aspect("equal", "box")
-ax2.set_xlabel("$y$ [cm]")
-ax2.set_ylabel("$x$ [cm]")
+cax4 = axs[1,1].pcolormesh(X, Y, phi_sd_ana[0], vmin=0, vmax=1)
+axs[1,1].set_aspect("equal", "box")
+axs[1,1].set_xlabel("$y$ [cm]")
+axs[1,1].set_ylabel("$x$ [cm]")
 
 
 def animate(i):
@@ -56,6 +78,12 @@ def animate(i):
     text1.set_text(r"$t \in [%.1f,%.1f]$ s" % (t[i], t[i + 1]))
     cax2.set_array(phi_sd[i])
     cax2.set_clim(phi_sd[i].min(), phi_sd[i].max())
+
+    cax3.set_array(phi_ana[i])
+    cax3.set_clim(phi_ana[i].min(), phi_ana[i].max())
+    text3.set_text(r"$t \in [%.1f,%.1f]$ s" % (t[i], t[i + 1]))
+    cax4.set_array(phi_sd_ana[i])
+    cax4.set_clim(phi_sd_ana[i].min(), phi_sd_ana[i].max())
 
 
 anim = animation.FuncAnimation(fig, animate, interval=200, frames=len(t) - 1)

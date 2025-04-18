@@ -1,29 +1,31 @@
 import numpy as np
-
 import mcdc
+import sys
 
 # =============================================================================
 # Set model
 # =============================================================================
 # N slab layers
 
-N_surfaces = 5 # input!
+N_surfaces = int(sys.argv[1])
+sigma_2 = float(sys.argv[2])
+
+delta_track = sys.argv[3]
+collision_est = sys.argv[4]
+
+#delta_track = False
+#collision_est = False
+#N_surfaces = 6 # input!
+#sigma_2 = 2.0 # input!
+
+
 Len = 6
-
-delta_track = False
-collision_est = False
-
 z_surfaces = np.linspace(0,Len, N_surfaces)
-
-#print(z_surfaces)
-#exit()
-
 sigma_1 = 1.0
-sigma_2 = 2.0 # input!
 
 # Set materials
 m1 = mcdc.material(capture=np.array([1.0]))
-m2 = mcdc.material(capture=np.array([1.5]))
+m2 = mcdc.material(capture=np.array([sigma_2]))
 
 # Set surfaces
 sLB = mcdc.surface("plane-z", z=z_surfaces[0], bc="vacuum")
@@ -43,6 +45,7 @@ for i in range(N_surfaces-1):
         mat = m2
     else: # if odd material is one
         mat = m1
+    
     mcdc.cell(+surfaces[i] & -surfaces[i+1], mat)
 
 
@@ -66,10 +69,12 @@ mcdc.tally.mesh_tally(
 # Setting
 mcdc.setting(N_particle=1e7)
 
-#mcdc.visualize('yz')
+# visualize if wanted
+# mcdc.visualize('zy', y=[0.0, 4.0], z=[0,6.0], save_as="{}surfSlab.png".format(N_surfaces))
 
+# turn on delta tracking and/or collision estimator
 if delta_track:
-    mcdc.delta_tracking(collision_ = collision_est)
+    mcdc.delta_tracking(collision_estimator = collision_est)
 
 # Run
 mcdc.run()

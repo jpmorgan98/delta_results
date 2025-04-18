@@ -8,14 +8,14 @@ surfaces = np.array([6, 10, 20, 50, 100])
 ratio = np.array([1, 5, 10, 100])
 
 delta_tracking = True
-collision_est = False
+collision_est = True
 
 runtimes = np.zeros((ratio.size, surfaces.size))
 errors = np.zeros((ratio.size, surfaces.size))
 
 for i in range(ratio.size):
     for j in range(surfaces.size):
-        print("\nRunning {0} surfaces and Σ2/Σ1 {}".format(surfaces[i], ratio[j]))
+        print("\nRunning {} surfaces and Σ2/Σ1 {}".format(surfaces[i], ratio[j]))
 
         os.system("srun -n 112 python input.py {} {} {} {}".format(surfaces[i], ratio[j], delta_tracking, collision_est)
                 + " --no-progress_bar --mode=numba --caching")

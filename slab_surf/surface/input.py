@@ -67,7 +67,7 @@ mcdc.tally.mesh_tally(
 )
 
 # Setting
-mcdc.setting(N_particle=1e7)
+mcdc.setting(N_particle=1e8)
 
 # visualize if wanted
 # mcdc.visualize('zy', y=[0.0, 4.0], z=[0,6.0], save_as="{}surfSlab.png".format(N_surfaces))

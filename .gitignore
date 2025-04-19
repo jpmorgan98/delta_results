@@ -19,6 +19,7 @@ __harmonize_cache__
 .DS_Store # for mac users
 **/.DS_Store
 *.prof
+*.lprof
 
 # Distribution / packaging
 .Python

@@ -23,7 +23,7 @@ echo ""
 echo ""
 echo ""
 
-python run.py
+srun -n 112 python input.py --no-progress_bar --mode=numba
 
 echo ""
 echo ""

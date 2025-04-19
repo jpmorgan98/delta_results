@@ -18,12 +18,12 @@ for i in range(ratio.size):
         print("\nRunning {} surfaces and Σ2/Σ1 {}".format(surfaces[j], ratio[i]))
 
         os.system("srun -n 112 python input.py {} {} {} {}".format(surfaces[j], ratio[i], delta_tracking, collision_est)
-                + " --no-progress_bar --mode=numba --caching")
+                + " --no-progress_bar --mode=numba --delta_tracking --caching")
 
         start = time.time()
 
         os.system("srun -n 112 python input.py {} {} {} {}".format(surfaces[j], ratio[i], delta_tracking, collision_est)
-                + " --no-progress_bar --mode=numba --caching")
+                + " --no-progress_bar --mode=numba --delta_tracking --caching")
         
         end = time.time()
         runtimes[i, j] = end-start

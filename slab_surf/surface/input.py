@@ -9,10 +9,6 @@ import sys
 
 N_surfaces = int(sys.argv[1])
 sigma_2 = float(sys.argv[2])
-
-delta_track = sys.argv[3]
-collision_est = sys.argv[4]
-
 #delta_track = False
 #collision_est = False
 #N_surfaces = 6 # input!
@@ -72,9 +68,6 @@ mcdc.setting(N_particle=1e8)
 # visualize if wanted
 # mcdc.visualize('zy', y=[0.0, 4.0], z=[0,6.0], save_as="{}surfSlab.png".format(N_surfaces))
 
-# turn on delta tracking and/or collision estimator
-if delta_track:
-    mcdc.delta_tracking(collision_estimator = collision_est)
 
 # Run
 mcdc.run()

@@ -1,0 +1,30 @@
+#!/bin/tcsh
+##### These lines are for Slurm
+#SBATCH -N 2
+#SBATCH -J c5ce_surf
+#SBATCH -t 1:00:00
+#SBATCH -p pbatch
+#SBATCH -A orsu
+
+##### These are shell commands
+date
+echo ""
+lscpu
+echo "" 
+module list
+
+source ~/dane/bin/activate
+
+which python
+
+echo ""
+echo ""
+echo ""
+
+srun -N -n 224 python input.py --no-progress_bar --mode=numba --no_caching --clear_cache --output  surface_c5g7
+
+echo ""
+echo ""
+echo "*****JOB COMPLETE******"
+echo ""
+echo ""

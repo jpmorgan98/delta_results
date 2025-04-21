@@ -1,0 +1,33 @@
+#!/bin/tcsh
+##### These lines are for Slurm
+#SBATCH -N 2
+#SBATCH -J c5ce_delta
+#SBATCH -t 1:00:00
+#SBATCH -p pbatch
+#SBATCH -A orsu
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=morgajoa@oregonstate.edu
+
+##### These are shell commands
+#--clear_cache
+date
+echo ""
+lscpu
+echo "" 
+module list
+
+source ~/dane/bin/activate
+
+which python
+
+echo ""
+echo ""
+echo ""
+
+srun -N -n 224 python input.py --no-progress_bar --mode=numba --delta_tracking --no_caching --clear_cache --output delta_c5g7_4phase
+
+echo ""
+echo ""
+echo "*****JOB COMPLETE******"
+echo ""
+echo ""

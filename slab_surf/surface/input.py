@@ -7,13 +7,10 @@ import sys
 # =============================================================================
 # N slab layers
 
-N_surfaces = int(sys.argv[1])
+sigma_1 = float(sys.argv[1])
 sigma_2 = float(sys.argv[2])
-#delta_track = False
-#collision_est = False
-#N_surfaces = 6 # input!
-#sigma_2 = 2.0 # input!
 
+N_surfaces = 100
 
 Len = 6
 z_surfaces = np.linspace(0,Len, N_surfaces)
@@ -63,11 +60,10 @@ mcdc.tally.mesh_tally(
 )
 
 # Setting
-mcdc.setting(N_particle=1e8)
+mcdc.setting(N_particle=1e4)
 
 # visualize if wanted
 # mcdc.visualize('zy', y=[0.0, 4.0], z=[0,6.0], save_as="{}surfSlab.png".format(N_surfaces))
-
 
 # Run
 mcdc.run()

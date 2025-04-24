@@ -388,9 +388,11 @@ mcdc.source(
 # Set tally, setting, and run mcdc
 # =============================================================================
 
+
+
 # Tally
 t_grid = np.linspace(0.0, 20.0, 201)
-mcdc.tally.mesh_tally(scores=["flux"], t=t_grid)
+mcdc.tally.mesh_tally(scores=["density"], t=t_grid)
 #mcdc.tally.mesh_tally(
 #    scores=["fission"],
 #    x=np.linspace(0.0, pitch * 17 * 2, 17 * 2 + 1),
@@ -407,8 +409,17 @@ mcdc.tally.mesh_tally(scores=["flux"], t=t_grid)
 #     t=t_grid
 # )
 
+
 # Setting
-mcdc.setting(N_particle=1e5, active_bank_buff=10000)
+mcdc.setting(N_particle=1e6, N_batch=10, active_bank_buff=100000)
+
+
+#mcdc.visualize('xz',
+#    x= [0.0, pitch * 17 * 2],
+#    y=-3*pitch,
+#    z= [-(core_height / 2), (core_height / 2)],
+#    pixels=(101, 101),
+#    time=np.array([0.0, 10, 15, 20]),)
 
 # Run
-mcdc.run()
+#mcdc.run()

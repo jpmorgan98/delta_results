@@ -7,9 +7,10 @@ import sys
 # =============================================================================
 # N slab layers
 
-N_surfaces = int(sys.argv[1])
+sigma_1 = float(sys.argv[1])
 sigma_2 = float(sys.argv[2])
 
+N_surfaces = 100
 
 Len = 6
 z_surfaces = np.linspace(0,Len, N_surfaces)
@@ -59,7 +60,7 @@ mcdc.tally.mesh_tally(
 )
 
 # Setting
-mcdc.setting(N_particle=1e8)
+mcdc.setting(N_particle=1e4)
 
 mcdc.delta_tracking()
 

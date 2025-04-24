@@ -245,9 +245,9 @@ Nt = 100
 y_grid = np.linspace(-core_width, core_width, Ny+1)
 z_grid = np.linspace(-50, 50, Nz+1)
 t_grid = np.linspace(0.7, 0.8, Nt+1)
-mcdc.tally.mesh_tally(scores=["fission"], t=t_grid)
+mcdc.tally.mesh_tally(scores=["density"], t=t_grid)
 mcdc.tally.mesh_tally(
-    scores=["fission", 'flux'],
+    scores=['flux'],
     y=y_grid,
     z=z_grid,
     t=t_grid,
@@ -258,17 +258,16 @@ mcdc.tally.mesh_tally(
 # =============================================================================
 
 # Setting
-mcdc.setting(N_particle=1e6, N_batch=30, active_bank_buff=10000)
+mcdc.setting(N_particle=1e7, N_batch=30, active_bank_buff=10000)
 
-mcdc.delta_tracking()
-
-#colors = {
+# mcdc.delta_tracking()
+# 
+# colors = {
 #     core: 'red',
 #     void: 'blue',
 #     tamp: 'green',
 # }
-#mcdc.visualize('xz', y=0.0, x=[-core_width, core_width], z=[-50, 50], pixels=(200, 200), colors=colors, time=np.linspace(0.7, 0.8, 101), save_as='geometry')
-
+# mcdc.visualize('xz', y=0.0, x=[-core_width, core_width], z=[-50, 50], pixels=(200, 200), colors=colors, time=np.linspace(0.7, 0.8, 101), save_as='geometry')
 
 # Run
 mcdc.run()

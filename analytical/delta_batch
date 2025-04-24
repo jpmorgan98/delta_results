@@ -1,0 +1,32 @@
+#!/bin/tcsh
+##### These lines are for Slurm
+#SBATCH -N 1
+#SBATCH -J verification
+#SBATCH -t 8:00:00
+#SBATCH -p pbatch
+#SBATCH -A orsu
+
+##### These are shell commands
+#--clear_cache
+date
+echo ""
+lscpu
+echo "" 
+module list
+
+source ~/dane/bin/activate
+
+which python
+
+export MCDC_XSLIB=/usr/workspace/morgan83/MCDC/MCDC-Xsec/mcdc_xs
+
+echo ""
+echo ""
+echo ""
+
+python run.py --srun 112 
+
+echo ""
+echo ""
+echo "*****JOB COMPLETE******"
+echo ""

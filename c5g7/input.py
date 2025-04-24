@@ -317,14 +317,62 @@ source = mcdc.source(
 
 # Tally
 t_grid = np.linspace(0.0, 20.0, 201)
-mcdc.tally.mesh_tally(scores=["flux"], t=t_grid)
+mcdc.tally.mesh_tally(scores=["density"], t=t_grid)
+
+import math
+
+mcdc.tally.mesh_tally(
+      scores=["flux"],
+      x=np.linspace(0.0, pitch * 17 * 3, 17 * 3 + 1),
+      y=np.linspace(-pitch * 17 * 3, 0.0, 17 * 3 + 1),
+      z=np.linspace(-(core_height / 2 + refl_thick), (core_height / 2 + refl_thick), int(math.ceil((core_height + 2.0 * refl_thick) / pitch)) + 1),
+      E=np.array([0.0, 0.625, 2e7]),
+      t=t_grid
+  )
 
 # Setting
-mcdc.setting(N_particle=1e6, active_bank_buff=100000)
+mcdc.setting(N_particle=1e6, N_batch=10, active_bank_buff=100000)
 # small particle count, a more realistic number is 1e7 or higher which
 # will require some acceleration to run at those high particle counts
 # This is a very hard problem to solve and may also require multiple
 # nodes depending on your systems
 
-# Run
+# t_grid = np.linspace(0.0, 20.0, 201)
+# 
+# colors = {
+#     mat_uo2: '#683ccb',
+#     mat_mox43: '#bf52d7',
+#     mat_mox7: '#fc71aa',
+#     mat_mod: "#2565cf",
+#     mat_gt: "#ffd098", #green
+#     mat_cr: "black",
+#     # not in viz
+#     mat_mox87: "green",
+#     mat_fc: "green",
+#  }
+# 
+# labels = {
+#     mat_uo2: r'Fuel (UO$_2$)',
+#     mat_mox43: 'Fuel (MOX43)',
+#     mat_mox7: 'Fuel (MOX7)',
+#     mat_mod: "Moderator",
+#     mat_gt: "Guide Tube", #green
+#     mat_cr: "Control Rod",
+#     # not in viz
+#     mat_mox87: "Fuel (MOX87)",
+#     mat_fc: "Fission Channel",
+#  }
+# 
+# mcdc.visualize('xz',
+#     x= [0, 2*pitch*17],
+#     y= -pitch*17 -2*pitch - pitch/2,
+#     z= [-(core_height / 2), 0],
+#     pixels=(200, 100),
+#     time=t_grid,
+#     colors = colors,
+#     save_as="geo/geometry",
+#     labels=labels,
+#     movie=True)
+
+
 mcdc.run()

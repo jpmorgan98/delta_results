@@ -2,11 +2,9 @@
 ##### These lines are for Slurm
 #SBATCH -N 2
 #SBATCH -J c5ce_delta
-#SBATCH -t 1:00:00
+#SBATCH -t 2:00:00
 #SBATCH -p pbatch
 #SBATCH -A orsu
-#SBATCH --mail-type=ALL
-#SBATCH --mail-user=morgajoa@oregonstate.edu
 
 ##### These are shell commands
 #--clear_cache
@@ -17,6 +15,7 @@ echo ""
 module list
 
 source ~/dane/bin/activate
+export MCDC_XSLIB=/usr/workspace/morgan83/MCDC/MCDC-Xsec/mcdc_xs
 
 which python
 
@@ -24,7 +23,7 @@ echo ""
 echo ""
 echo ""
 
-srun -N -n 224 python input.py --no-progress_bar --mode=numba --delta_tracking --no_caching --clear_cache --output delta_c5g7_4phase
+srun -n 224 python input.py --no-progress_bar --mode=numba --delta_tracking --no_caching --clear_cache --output delta_c5ce
 
 echo ""
 echo ""

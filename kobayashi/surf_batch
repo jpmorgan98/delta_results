@@ -1,12 +1,10 @@
 #!/bin/tcsh
 ##### These lines are for Slurm
-#SBATCH -N 1
+#SBATCH -N 2
 #SBATCH -J koby_surf
 #SBATCH -t 1:00:00
 #SBATCH -p pbatch
 #SBATCH -A orsu
-#SBATCH --mail-type=ALL
-#SBATCH --mail-user=morgajoa@oregonstate.edu
 
 ##### These are shell commands
 date
@@ -23,7 +21,7 @@ echo ""
 echo ""
 echo ""
 
-srun -N -n 112 python input.py --no-progress_bar --mode=numba --output surface_koby
+srun -n 224 python input.py --no-progress_bar --mode=numba --output surface_koby
 
 echo ""
 echo ""

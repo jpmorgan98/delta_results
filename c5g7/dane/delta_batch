@@ -1,0 +1,34 @@
+#!/bin/tcsh
+##### These lines are for Slurm
+#SBATCH -N 1
+#SBATCH -J c5g7_delta
+#SBATCH -t 4:00:00
+#SBATCH -p pbatch
+#SBATCH -A orsu
+
+##### These are shell commands
+#--clear_cache
+date
+echo ""
+lscpu
+echo "" 
+module list
+
+source ~/dane/bin/activate
+
+which python
+
+cp ../input.py .
+cp ../MGXS-C5G7-TD.h5
+
+echo ""
+echo ""
+echo ""
+
+srun -n 112 python input.py --no-progress_bar --mode=numba --delta_tracking --no_caching --clear_cache --output delta_c5g7
+
+echo ""
+echo ""
+echo "*****JOB COMPLETE******"
+echo ""
+echo ""

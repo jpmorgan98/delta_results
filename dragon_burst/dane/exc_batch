@@ -1,0 +1,33 @@
+#!/bin/tcsh
+##### These lines are for Slurm
+#SBATCH -N 1
+#SBATCH -J drag_exc
+#SBATCH -t 4:00:00
+#SBATCH -p pbatch
+#SBATCH -A orsu
+
+##### These are shell commands
+date
+echo ""
+lscpu
+echo "" 
+module list
+
+source ~/dane/bin/activate
+export MCDC_XSLIB=/usr/workspace/morgan83/MCDC/MCDC-Xsec/mcdc_xs
+
+which python
+
+cp ../input_ex.py .
+
+echo ""
+echo ""
+echo ""
+
+srun -n 112 python input_ex.py --no-progress_bar --mode=numba --delta_tracking --no_caching --clear_cache --output ex_dragon_ce
+
+echo ""
+echo ""
+echo "*****JOB COMPLETE******"
+echo ""
+echo ""

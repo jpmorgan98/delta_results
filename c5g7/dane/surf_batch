@@ -1,8 +1,8 @@
 #!/bin/tcsh
 ##### These lines are for Slurm
-#SBATCH -N 2
-#SBATCH -J drag_surf
-#SBATCH -t 2:00:00
+#SBATCH -N 1
+#SBATCH -J c5g7_surf
+#SBATCH -t 4:00:00
 #SBATCH -p pbatch
 #SBATCH -A orsu
 
@@ -18,11 +18,15 @@ export MCDC_XSLIB=/usr/workspace/morgan83/MCDC/MCDC-Xsec/mcdc_xs
 
 which python
 
+cp ../input.py .
+cp ../MGXS-C5G7-TD.h5
+
 echo ""
 echo ""
 echo ""
 
-srun -n 224 python input.py --no-progress_bar --mode=numba --no_caching --clear_cache --output  surface_dragon
+srun -n 112 python input.py --no-progress_bar --mode=numba --no_caching --clear_cache --output  surface_c5g7
+
 echo ""
 echo ""
 echo "*****JOB COMPLETE******"

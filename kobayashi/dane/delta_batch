@@ -1,12 +1,13 @@
 #!/bin/tcsh
 ##### These lines are for Slurm
-#SBATCH -N 2
-#SBATCH -J c5g7_surf
+#SBATCH -N 1
+#SBATCH -J koby_delta
 #SBATCH -t 2:00:00
 #SBATCH -p pbatch
 #SBATCH -A orsu
 
 ##### These are shell commands
+#--clear_cache
 date
 echo ""
 lscpu
@@ -14,15 +15,16 @@ echo ""
 module list
 
 source ~/dane/bin/activate
-export MCDC_XSLIB=/usr/workspace/morgan83/MCDC/MCDC-Xsec/mcdc_xs
 
 which python
 
+cp ../input.py .
+
 echo ""
 echo ""
 echo ""
 
-srun -n 224 python input.py --no-progress_bar --mode=numba --no_caching --clear_cache --output  surface_c5g7
+srun -n 112 python input.py --no-progress_bar --mode=numba --delta_tracking --output delta_koby
 
 echo ""
 echo ""

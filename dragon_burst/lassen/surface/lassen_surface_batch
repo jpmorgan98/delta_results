@@ -1,0 +1,35 @@
+#!/bin/tcsh
+
+### LSF syntax
+#BSUB -nnodes 1                   #number of nodes
+#BSUB -W 240                      #walltime in minutes
+#BSUB -J dragon_surface  #name of job
+#BSUB -q pbatch                   #queue to use
+#BSUB -N
+
+### Shell scripting
+date; hostname
+echo -n 'JobID is '; echo $LSB_JOBID
+module load cuda/11.8.0 base-gcc/11.2.1 gcc/11.2.1
+module list
+echo ""
+#nvidia-smi
+source ~/.bashrc
+conda activate dt
+conda list
+which python
+echo ""
+echo ""
+echo ""
+export MCDC_XSLIB=/usr/workspace/morgan83/lassen_dep/MCDC/MCDC-Xsec/mcdc_xs
+
+cp ../../input.py .
+
+### Launch parallel executable lalloc 1 jsrun -n 4 -r 4 -a 1 -g 1 python input.py --no-progress_bar --mode=numba --delta_tracking --target=gpu --output surface_c5ce_lassen
+jsrun -n 4 -r 4 -a 1 -g 1 python input.py --no-progress_bar --mode=numba --target=gpu --output surface_dragon_lassen
+
+echo ""
+echo ""
+echo "*****JOB COMPLETE******"
+echo ""
+echo ""

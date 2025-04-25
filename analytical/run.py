@@ -62,7 +62,7 @@ for name in tasks:
 
         # Command
         command = (
-            "%s python input.py --mode=numba --N_particle=%i --output=%s --no-progress_bar --caching"
+            "%s python input.py --mode=numba --delta_tracking --N_particle=%i --output=%s --no-progress_bar --caching"
             % (mpi_command, N_particle, output)
         )
         # Run

@@ -75,7 +75,7 @@ mcdc.tally.mesh_tally(
 mcdc.setting(N_particle=int(1e9), N_batch=30, progress_bar=False)
 #mcdc.implicit_capture()
 
-#mcdc.delta_tracking() #collision_estimator=True
+mcdc.delta_tracking(collision_estimator=True) #collision_estimator=True
 
 # Run
 mcdc.run()

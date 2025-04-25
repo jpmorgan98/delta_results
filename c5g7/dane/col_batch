@@ -1,8 +1,8 @@
 #!/bin/tcsh
 ##### These lines are for Slurm
-#SBATCH -N 2
-#SBATCH -J koby_delta
-#SBATCH -t 1:00:00
+#SBATCH -N 1
+#SBATCH -J c5g7_col
+#SBATCH -t 4:00:00
 #SBATCH -p pbatch
 #SBATCH -A orsu
 
@@ -18,11 +18,14 @@ source ~/dane/bin/activate
 
 which python
 
+cp ../input_col.py .
+cp ../MGXS-C5G7-TD.h5
+
 echo ""
 echo ""
 echo ""
 
-srun -n 224 python input.py --no-progress_bar --mode=numba --delta_tracking --output delta_koby
+srun -n 112 python input_col.py --no-progress_bar --mode=numba --delta_tracking --no_caching --clear_cache --output col_c5g7
 
 echo ""
 echo ""

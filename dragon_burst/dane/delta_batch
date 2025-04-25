@@ -1,8 +1,8 @@
 #!/bin/tcsh
 ##### These lines are for Slurm
-#SBATCH -N 2
-#SBATCH -J koby_surf
-#SBATCH -t 1:00:00
+#SBATCH -N 1
+#SBATCH -J drag_delta
+#SBATCH -t 4:00:00
 #SBATCH -p pbatch
 #SBATCH -A orsu
 
@@ -14,14 +14,17 @@ echo ""
 module list
 
 source ~/dane/bin/activate
+export MCDC_XSLIB=/usr/workspace/morgan83/MCDC/MCDC-Xsec/mcdc_xs
 
 which python
 
+cp ../input.py .
+
 echo ""
 echo ""
 echo ""
 
-srun -n 224 python input.py --no-progress_bar --mode=numba --output surface_koby
+srun -n 112 python input.py --no-progress_bar --mode=numba --delta_tracking --no_caching --clear_cache --output delta_dragon_ce
 
 echo ""
 echo ""

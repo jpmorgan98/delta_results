@@ -19,7 +19,7 @@ source ~/dane/bin/activate
 which python
 
 cp ../input_col.py .
-cp ../MGXS-C5G7-TD.h5
+cp ../MGXS-C5G7-TD.h5 .
 
 echo ""
 echo ""

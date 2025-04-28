@@ -24,7 +24,7 @@ echo ""
 export MCDC_XSLIB=/usr/workspace/morgan83/lassen_dep/MCDC/MCDC-Xsec/mcdc_xs
 
 cp ../../input_col.py .
-cp ../../MGXS-C5G7-TD.h5
+cp ../../MGXS-C5G7-TD.h5 .
 
 ### Launch parallel executable lalloc 1 jsrun -n 4 -r 4 -a 1 -g 1 python input.py --no-progress_bar --mode=numba --delta_tracking --target=gpu --output surface_c5ce_lassen
 jsrun -n 4 -r 4 -a 1 -g 1 python input_col.py --no-progress_bar --mode=numba --delta_tracking --target=gpu --output col_c5g7_lassen

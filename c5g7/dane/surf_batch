@@ -19,7 +19,7 @@ export MCDC_XSLIB=/usr/workspace/morgan83/MCDC/MCDC-Xsec/mcdc_xs
 which python
 
 cp ../input.py .
-cp ../MGXS-C5G7-TD.h5
+cp ../MGXS-C5G7-TD.h5 .
 
 echo ""
 echo ""

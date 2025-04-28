@@ -2,7 +2,7 @@
 ##### These lines are for Slurm
 #SBATCH -N 1
 #SBATCH -J c5ce_surface
-#SBATCH -t 4:00:00
+#SBATCH -t 6:00:00
 #SBATCH -p pbatch
 #SBATCH -A orsu
 

@@ -8,7 +8,7 @@ import numpy as np
 # The infinite homogenous medium is modeled with reflecting slab
 
 # Load material data
-with np.load("../../data/MGXS-SHEM361.npz") as data:
+with np.load("../data/MGXS-SHEM361.npz") as data:
     SigmaC = data["SigmaC"] * 1.5  # /cm
     SigmaS = data["SigmaS"]
     SigmaF = data["SigmaF"]

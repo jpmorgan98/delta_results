@@ -422,4 +422,4 @@ mcdc.setting(N_particle=1e6, N_batch=10, active_bank_buff=100000)
 #    time=np.array([0.0, 10, 15, 20]),)
 
 # Run
-#mcdc.run()
+mcdc.run()
